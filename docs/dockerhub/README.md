@@ -10,12 +10,12 @@ You can use this version with the following:
 
 *Docker*
 ```shell
-docker run -i -t <args> hashicorp/packer:light <command>
+docker run -i -t <args> devtestlabs/hashicorp-packer:light <command>
 ```
 
 *Podman*
 ```shell
-podman run -i -t <args> hashicorp/packer:light <command>
+podman run -i -t <args> devtestlabs/hashicorp-packer:light <command>
 ```
 
 ### Running a Packer build:
@@ -27,14 +27,14 @@ file on the docker image:
 ```shell
 docker run -it \
 	--mount type=bind,source=/absolute/path/to/template.json,target=/mnt/template.json \
-	hashicorp/packer:latest build /mnt/template.json
+	devtestlabs/hashicorp-packer:latest build /mnt/template.json
 ```
 
 *Podman*
 ```shell
 podman run -it \
 	--mount type=bind,source=/absolute/path/to/template.json:Z,target=/mnt/template.json \
-	hashicorp/packer:latest build /mnt/template.json
+	devtestlabs/hashicorp-packer:latest build /mnt/template.json
 ```
 
 If you have several files you need Packer to have access to, you'll want to
@@ -44,7 +44,7 @@ bind mount a directory containing all of those files:
 ```shell
 docker run -it \
     --mount type=bind,source=/absolute/path/to/test_docker_packer,target=/mnt/test_docker_packer \
-    hashicorp/packer:latest build \
+    devtestlabs/hashicorp-packer:latest build \
     --var-file /mnt/test_docker_packer/vars.json \
     /mnt/test_docker_packer/template.json
 ```
@@ -53,7 +53,7 @@ docker run -it \
 ```shell
 podman run -it \
     --mount type=bind,source=/absolute/path/to/test_docker_packer:Z,target=/mnt/test_docker_packer \
-    hashicorp/packer:latest build \
+    devtestlabs/hashicorp-packer:latest build \
     --var-file /mnt/test_docker_packer/vars.json \
     /mnt/test_docker_packer/template.json
 ```
