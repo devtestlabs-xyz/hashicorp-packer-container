@@ -1,0 +1,41 @@
+name: Build and Publish Hashicorp Packer image
+ 
+on:
+  push:
+    paths:
+    - 'dockerfiles/alpine/**'
+    - '.requirements/alpine-linux.version'
+    - '.requirements/packer.version'
+    - '!dockerfiles/alpine/README.md'  
+
+env:
+  _GH_BASE_URI: https://github.com/
+  _BASE_IMAGE: alpine
+  _IMAGE_VARIANT: light
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set _PACKER_VERSION env variable
+        run: echo ::set-env name=_PACKER_VERSION::$(cat ./.requirements/packer.version)
+      - name: Set _PACKER_SHA256SUM env variable
+        run: echo ::set-env name=_PACKER_SHA256SUM::$(cat ./.requirements/packer.sha256sum)
+      - name: Set _BASE_IMAGE_VERSION env variable
+        run: echo ::set-env name=_BASE_IMAGE_VERSION::$(cat ./.requirements/alpine-linux.version)
+      - name: Set _BUILD_DATETIME env variable to current datetime
+        run: echo "::set-env name=_BUILD_DATETIME::$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+      - name: Get Github commit short SHA
+        run: echo "::set-env name=_GH_SHA8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: Publish to Docker Repository
+        env:
+          _IMAGE_LONG_VERSION: ${{ env._PACKER_VERSION }}-${{ env._IMAGE_VARIANT }}-${{ env._BASE_IMAGE }}${{ env._BASE_IMAGE_VERSION }}
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: ${{ secrets.DOCKERHUB_REPO }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PAT }}
+          context: dockerfiles/alpine
+          buildargs: BASE_IMAGE_VERSION=${{ env._BASE_IMAGE_VERSION }}, PACKER_VERSION=${{ env._PACKER_VERSION }}, PACKER_SHA256SUM=${{ env._PACKER_SHA256SUM }}, VCS_URL=${{ env._GH_BASE_URI }}${{ env.GITHUB_REPOSITORY }}, VCS_REF=${{ env._GH_SHA8 }}, IMAGE_LONG_VERSION=${{ env._IMAGE_LONG_VERSION }}, BUILD_DATETIME=${{ env._BUILD_DATETIME }}
+          tags: ${{ env._PACKER_VERSION }}-${{ env._IMAGE_VARIANT }}-${{ env._BASE_IMAGE }}${{ env._BASE_IMAGE_VERSION }}, ${{ env._PACKER_VERSION }}-${{ env._IMAGE_VARIANT }}, ${{ env._IMAGE_VARIANT }}, ${{ env._IMAGE_VARIANT }}-${{ env._GH_SHA8 }}
