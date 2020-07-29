@@ -89,11 +89,11 @@ podman build -t my_local_packer .
 ## Learning more about Hashicorp Packer
 Hashicorp has some of the best documentation in the business. Go read and get some hands on experience with Hashicorp Packer!
 
-[Hashicorp Learn Platform: Learning Packer](https://learn.hashicorp.com/packer)
+* [Hashicorp Learn Platform: Learning Packer](https://learn.hashicorp.com/packer)
 
-[Official Hashicorp Packer Guides](https://www.packer.io/guides)
+* [Official Hashicorp Packer Guides](https://www.packer.io/guides)
 
-[Official Hashicorp Packer Docs](https://www.packer.io/docs)
+* [Official Hashicorp Packer Docs](https://www.packer.io/docs)
 
 
 ## External References
