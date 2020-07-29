@@ -1,4 +1,3 @@
-# hashicorp-packer-container
 ## Overview
 The purpose of this project is to manage an OCI-compliant [`Hashicorp Packer`](https://packer.io) container based on the official Alpine Linux image. This container image may be run in Docker and Podman.
 
@@ -59,24 +58,14 @@ podman run -it \
     /mnt/test_docker_packer/template.json
 ```
 
-## Build the image locally
-You can build the container image locally:
+## Github project
 
-*Docker*
-```shell
-cd dockerfiles/alpine
+https://github.com/devtestlabs-xyz/hashicorp-packer-container
 
-docker build -t my_local_packer .
-```
-
-*Podman*
-```shell
-cd dockerfiles/alpine
-
-podman build -t my_local_packer .
-```
 
 ## External References
+
+* [Github: devtestlabs-xyz/hashicorp-packer-container project](https://github.com/devtestlabs-xyz/hashicorp-packer-container)
 
 * [Official Hashicorp Packer Container project](https://github.com/hashicorp/docker-hub-images/tree/master/packer)
 
