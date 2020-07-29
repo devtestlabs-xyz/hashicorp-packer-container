@@ -18,6 +18,11 @@ docker run -i -t <args> devtestlabs/hashicorp-packer:light <command>
 podman run -i -t <args> devtestlabs/hashicorp-packer:light <command>
 ```
 
+*Podman example*
+```shell
+podman run -it devtestlabs/hashicorp-packer:light help
+```
+
 ### Running a Packer build:
 
 The easiest way to run a command that references a file is to bind mount the
