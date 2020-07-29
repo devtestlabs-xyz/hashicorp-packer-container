@@ -6,6 +6,7 @@ on:
     - 'dockerfiles/alpine/**'
     - '.requirements/alpine-linux.version'
     - '.requirements/packer.version'
+    - '.requirements/packer.sha256sum'
     - '!dockerfiles/alpine/README.md'  
 
 env:
