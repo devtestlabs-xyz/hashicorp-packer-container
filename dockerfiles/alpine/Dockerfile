@@ -35,7 +35,7 @@ RUN set -x \
     echo "==> Upgrading apk and system..." \
     && apk update && apk upgrade \
     && \
-    echo "==> Installing Python and other required APKs..." \
+    echo "==> Installing required APKs..." \
     && apk add --no-cache ${APK_PACKAGES}
 
 RUN sed -i '/.*linux_amd64.zip/!d' packer_${PACKER_VERSION}_SHA256SUMS \
