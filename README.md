@@ -59,6 +59,9 @@ podman run -it \
     /mnt/test_docker_packer/template.json
 ```
 
+## Dockerhub repository
+https://hub.docker.com/r/devtestlabs/hashicorp-packer
+
 ## Build the image locally
 You can build the container image locally:
 
